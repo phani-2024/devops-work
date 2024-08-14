@@ -1,0 +1,57 @@
+ Linux Scenario based Practicals
+=============================================================================================================================
+1. Create a user account with username devops-admin with the following attributes: -- sudo useradd devops-admin
+  a. Use a password of devops-science. $ sudo passwd devops-admin., $ devops-science.
+  b. This user’s home directory is defined as /home/devops-adm - (sudo -i, cd /home/, $ mv devops-admin devops-adm) 
+  c. Provide devops-admin sudo privileges ($ sudo visudo , devops-admin ALL=(ALL:ALL) ALL)
+  d. The default shell for this user should be /bin/sh. ($ sudo vi /etc/passwd, edit /bin/shell to /bin/sh and save, 
+     to verfiy $ echo $SHELL)
+============================================================================================================================
+2. Create a "aws-admin" user account with the password aws-science. - $ sudo useradd aws-admin
+   Modify the sudo configuration to let the aws-admin account access root privileges. ($ sudo visudo ; aws-admin ALL=(ALL:ALL) ALL - save & exit the file.
+============================================================================================================================
+3. Login as "aws-admin" user and Create 10 files with name "devops-1 to devops-10". (sudo su aws-admin ; $ cd ; $ touch devops-{1..10}
+   change permission of all files to 775. ($ chmod 755 devops-{1..10}; $ ls -l - to verify the file permissions)
+   Now transfer ownership of that file to "devops-admin" ($ sudo chown devops-admin devops-{1..10} ;$ sudo cd /home/aws-admin; $ ls -l to verify the change of ownership )
+   Finally check if "aws-admin" user is able to access or write any content inside "devops-1 to devops 10" files ? no, not able to edit the content as file permissions are 
+   read and execute for group & others,& aws-admin is not the owner of these files)
+============================================================================================================================
+4. Move entire files "devops-1 to devops10" under /opt/devops directory.
+   Transfer ownership to root user.
+   Change permission of the files to "read only mode" where only owner of that file should read file.
+============================================================================================================================
+5. Create an group "system-operations" and add "aws-admin" and "devops-admin" to that group?
+   Once user is added to group try to remove user from that "system-operations" group?
+============================================================================================================================
+6. Reset the password of "aws-admin" user by removing the entry from /etc/shadow file and run "passwd aws-admin" ?
+============================================================================================================================
+7. Reboot the machine from command line and check what is exact time of machine reboot ?
+============================================================================================================================
+8. Run "yum install git -y" and check now in which path git is installed?
+============================================================================================================================
+9. Create 5 files as "file1.txt - file5.txt" and  5 files as "sample1.sh - sample2.sh" 
+   Now list only ".txt" files and delete ".sh" files?
+============================================================================================================================
+10. Now move all "txt" created in "task 9" to /opt/devops and change permission of "txt" and change ownership to "devops-admin" user
+============================================================================================================================
+11. Install package httpd via yum commmand and Remove the package long dependencies ?
+============================================================================================================================
+12. Follow the below instructions and perform the acitivity.
+     Note: perform task with root user login
+     a. Download the software using below link under /opt
+     b. Extract the zip bundle.
+     c. Rename the extracted directory to sonarqube.
+     d. Now delete all directories under /opt/sonarqube/bin directory except linux-x86-64 
+     f. Now again bundle(or take backup) the "sonarqube directory under /opt using .tar.gz(bundle and compress)
+     Software link: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.4.87374.zip
+============================================================================================================================
+13 Follow the below instructions and perform the activity.
+   Note: perform task with root user login
+    a. Download the binary for kubectl execution.
+       curl -LO https://dl.k8s.io/release/v1.27.4/bin/linux/amd64/kubectl
+
+    b. Run below command:
+      sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+    c. Try to run "kubectl" command , it should access from any location and should not give any error.
+       What mechansim will apply kubectl from any location?
